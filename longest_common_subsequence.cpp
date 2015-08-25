@@ -1,51 +1,48 @@
 #include<iostream>
-#include<cstring> 
 #include<algorithm>
+#include<cstring>
 
-#define MAX 2002
-using namespace std ; 
+#define MAX 1002
+
+using namespace std ;
 
 int main ()
 {
-	int l1 , l2 , i , j;
-	char s1[MAX] , s2[MAX] ; 
+        int lena , lenb , i , j ; 
+        char a[MAX] , b[MAX] ; 
+        
+        cin>> a ; 
+        cin >> b ; 
+        cout << a <<" " << b; 
 
-	cin >> s1 ;
-	cin >> s2 ; 
-	l1 = strlen(s1) ; 
-	l2 = strlen(s2) ;
-	
-	int lcs[l1+1][l2+1] ;
-	for (i = -1 ;i<l1 ;i++){
-		for (j = -1 ; j<l2 ;j++){
-			if (i == -1 || j == -1){
-				lcs[i][j] = 0;
-				cout << "in if condition loop => " << "lcs" << i << "," << j << " = " << lcs[i][j] << endl ; 
-			}
 
-			else{
-				cout << "lcs[0][0]= " << lcs[0][0] << endl; 
-				cout << "in else condition =>" << "lcs" << i << "," << j << " = " << lcs[i][j] << endl ; 
-				cout << "lcs[0][0]= " << lcs[0][0] << endl; 
-				lcs[i][j] = max (lcs[i-1][j] , lcs[i][j-1]) ; // if there is a mismatch between the string current characters 
-				
-				cout << "lcs[0][0]= " << lcs[0][0] << endl;
-				//if the characters of the string gets matched
-				if (s1[i-1] == s2[j-1]) {
-					lcs[i][j] = (lcs[i-1][j-1] +1 ,lcs[i][j]) ; 
-				}
-			}
+        lena = strlen(a) ; 
+        lenb = strlen(b) ;
 
-		}	
-	}
+        int lcs[lena][lenb] ;  
 
-	for (i = -1 ; i<l1 ; i++){
-		for(j = -1 ; j<l2 ; j++){
-			cout << lcs[i][j] << "  " ; 
-			cout << "print loop " << "lcs" << i << "," << j << " = " << lcs[i][j] << endl ; 
-		}
-		cout << "\n" ; 
-	}
-	cout << "Answer = " << lcs[l1-1][l2-1] << endl; 
-return 0 ;
+        for (i = 0 ;i<=lena ; i++) {
+                for (j = 0 ; j<=lenb ; j++){
+			
+                        if (i == 0 || j == 0){
+                                lcs[i][j] = 0 ;
+                        }
+                        else {
+                                cout << "In else construct ";
+                                cout << lcs[i-1][j] << "  "<< lcs[i][j-1] << endl;
+                                lcs[i][j] = max(lcs[i][j-1] ,lcs[i-1][j]) ; 
+                                cout <<lcs[i][j]  << endl ; 
+				cout << a[i-1] <<"  "<< b[i-1] << endl;
+                                if (a[i-1] == b[i-1]){
+                                        lcs[i][j] = max (lcs[i-1][j-1] +1 , lcs[i][j]) ;
+                                }
+                                cout << lcs[i][j] << endl ;
+                                       
+                        }
+                }
+        }
+
+	cout << "ans = " << lcs[i][j] << "\n" ;
+
+return 0 ; 
 }
