@@ -23,7 +23,7 @@ int main ()
 
         for (i = 0 ;i<=lena ; i++) {
                 for (j = 0 ; j<=lenb ; j++){
-			
+			cout << "i and j" << i << "  " << j << endl;
                         if (i == 0 || j == 0){
                                 lcs[i][j] = 0 ;
                         }
@@ -32,8 +32,8 @@ int main ()
                                 cout << lcs[i-1][j] << "  "<< lcs[i][j-1] << endl;
                                 lcs[i][j] = max(lcs[i][j-1] ,lcs[i-1][j]) ; 
                                 cout <<lcs[i][j]  << endl ; 
-				cout << a[i-1] <<"  "<< b[i-1] << endl;
-                                if (a[i-1] == b[i-1]){
+				cout << a[i-1] <<"  "<< b[j-1] << endl;
+                                if (a[i-1] == b[j-1]){
                                         lcs[i][j] = max (lcs[i-1][j-1] +1 , lcs[i][j]) ;
                                 }
                                 cout << lcs[i][j] << endl ;
@@ -42,7 +42,7 @@ int main ()
                 }
         }
 
-	cout << "ans = " << lcs[i][j] << "\n" ;
+	cout << "ans = " << lcs[lena][lenb] << "\n" ;
 
 return 0 ; 
 }
